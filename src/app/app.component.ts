@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {timeout} from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -6,13 +7,16 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Lista Zadań';
+  config: { [key: string]: string } | null = null;
 
-  get footer(): string {
-    return '© Lista zadań,All rights reserved.';
-  }
+  constructor() {
+    setTimeout(() => {
+      this.config = {
+        title: 'Lista zadań',
+        footer: '@ Lista zadań zbudowana w Angularze.',
+        date: new Date().toDateString()
+      };
+    }, 500);
 
-  getDate(): Date {
-    return new Date();
   }
 }
